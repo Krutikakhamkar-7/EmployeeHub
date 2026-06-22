@@ -1,68 +1,79 @@
-@model IEnumerable<EmployeeManagement.Models.Employee>
+    @model IEnumerable<EmployeeManagement.Models.Employee>
 
-@{
-    ViewData["Title"] = "Employees";
-}
-
-<h1>Employee Management</h1>
-<form method="get">
-    <input type="text"
-           name="search"
-           placeholder="Search Employee..."
-           class="form-control" />
-
-    <br />
-
-    <button type="submit"
-            class="btn btn-primary">
-        Search
-    </button>
-</form>
-
-<br />
-
-<a href="/Employee/Create" class="btn btn-primary">
-    Add Employee
-</a>
-
-<hr />
-
-<table class="table table-bordered">
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Email</th>
-            <th>Phone</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-
-    <tbody>
-
-    @foreach(var item in Model)
-    {
-        <tr>
-            <td>@item.EmployeeId</td>
-            <td>@item.FirstName</td>
-            <td>@item.LastName</td>
-            <td>@item.Email</td>
-            <td>@item.PhoneNo</td>
-
-            <td>
-                <a href="/Employee/Edit/@item.EmployeeId"
-                   class="btn btn-warning">
-                    Edit
-                </a>
-
-                <a href="/Employee/Delete/@item.EmployeeId"
-                   class="btn btn-danger">
-                    Delete
-                </a>
-            </td>
-        </tr>
+    @{
+        ViewData["Title"] = "Employees";
     }
+    <div class="container mt-4">
+    <h1 class="text-center text-primary mb-4">
+        Employee Management System
+    </h1>
+    <form method="get" class="row g-3 mb-3">
+        <div class="col-md-6">
+            <input type="text"
+                name="search"
+                class="form-control"
+                placeholder="Search by First Name or Last Name" />
+        </div>
 
-    </tbody>
-</table>
+        <div class="col-md-2">
+            <button type="submit"
+                    class="btn btn-primary w-100">
+                Search
+            </button>
+        </div>
+    </form>
+    <a href="/Employee/Create" class="btn btn-success">   
+    Add Employee
+    </a>
+
+    <hr />
+    <table class="table table-striped table-hover table-bordered">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>DOB</th>
+                <th>Country</th>
+                <th>State</th>
+                <th>City</th>
+                <th>Qualification</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+        @foreach(var item in Model)
+        {
+            <tr>
+                <td>@item.EmployeeId</td>
+                <td>@item.FirstName</td>
+                <td>@item.LastName</td>
+                <td>@item.DOB</td>
+                <td>@item.Country</td>
+                <td>@item.State</td>
+                <td>@item.City</td>
+                <td>@item.Qualification</td>
+                <td>@item.Email</td>
+                <td>@item.PhoneNo</td>
+
+                <td>
+                    <a href="/Employee/Edit/@item.EmployeeId"
+                    class="btn btn-warning">
+                        Edit
+                    </a>
+
+                    <a href="/Employee/Delete/@item.EmployeeId"
+                    class="btn btn-danger">
+                        Delete
+                    </a>
+                </td>
+            </tr>
+        }
+
+        </tbody>
+    </table>
+    </div>

@@ -1,49 +1,56 @@
 @model EmployeeManagement.Models.Employee
-
-<h2>Add Employee</h2>
-
+<div class="container mt-4">
+<h2 class="text-center text-success mb-4">
+    Add Employee
+</h2>
 <form method="post">
 
     <label>First Name</label>
-    <input asp-for="FirstName" />
+    <input asp-for="FirstName" class="form-control" />
     <br /><br />
+    <span asp-validation-for="FirstName" class="text-danger"></span>
 
     <label>Last Name</label>
-    <input asp-for="LastName" />
+    <input asp-for="LastName" class="form-control" />
     <br /><br />
+    <span asp-validation-for="LastName" class="text-danger"></span>
 
     <label>Date Of Birth</label>
-    <input asp-for="DOB" type="date" />
+    <input asp-for="DOB" type="date" class="form-control" />
     <br /><br />
+    <span asp-validation-for="DOB" class="text-danger"></span>
 
     <label>Country</label>
-    <select asp-for="Country">
+    <select asp-for="Country" class="form-control">
     <option value="">Select Country</option>
     <option>India</option>
     <option>USA</option>
     <option>UK</option>
     </select>   
     <br /><br />
+    <span asp-validation-for="Country" class="text-danger"></span>
 
     <label>State</label>
-    <select asp-for="State">
+    <select asp-for="State" class="form-control ">
     <option value="">Select State</option>
     <option>Maharashtra</option>
     <option>Gujarat</option>
     <option>Karnataka</option>
     </select>
     <br /><br />
+    <span asp-validation-for="State" class="text-danger"></span>
 
     <label>City</label>
-    <select asp-for="City">
+    <select asp-for="City" class="form-control  ">
     <option>Mumbai</option>
     <option>Pune</option>
     <option>Nagpur</option>
     </select>
     <br /><br />
+    <span asp-validation-for="City" class="text-danger"></span>
 
     <label>Qualification</label>
-    <select asp-for="Qualification">
+    <select asp-for="Qualification" class="form-control">
     <option value="">Select Qualification</option>
     <option>B.Tech</option>
     <option>BCA</option>
@@ -52,17 +59,21 @@
     <option>BSc</option>
     </select>
     <br /><br />
+    <span asp-validation-for="Qualification" class="text-danger"></span>
 
     <label>Email</label>
-    <input asp-for="Email" />
+    <input asp-for="Email" class="form-control" />
     <br /><br />
+    <span asp-validation-for="Email" class="text-danger"></span>
 
-    <label>Phone</label>
-    <input asp-for="PhoneNo" />
+    <label>Phone No</label>
+    <input asp-for="PhoneNo" class="form-control" />
     <br /><br />
+    <span asp-validation-for="PhoneNo" class="text-danger"></span>
 
-    <button type="submit">
-        Save Employee
+    <button type="submit" class="btn btn-success">
+    Save Employee
     </button>
 
 </form>
+</div>

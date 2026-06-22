@@ -1,25 +1,25 @@
 @model EmployeeManagement.Models.Employee
-
-<h2>Edit Employee</h2>
-
+<div class="container mt-4">
+<h2 class="text-center text-warning mb-4">
+    Edit Employee
+</h2>
 <form method="post">
 
     <input type="hidden" asp-for="EmployeeId" />
 
     <label>First Name</label>
-    <input asp-for="FirstName" />
-    <br /><br />
+    <input asp-for="FirstName" class="form-control" />    <br /><br />
 
     <label>Last Name</label>
-    <input asp-for="LastName" />
+    <input asp-for="LastName" class="form-control" />
     <br /><br />
      
     <label>Date Of Birth</label>
-    <input asp-for="DOB" type="date" />     
+    <input asp-for="DOB" type="date" class="form-control" />
     <br /><br />
 
     <label>Country</label>
-    <select asp-for="Country">
+    <select asp-for="Country" class="form-control">
     <option value="">Select Country</option>
     <option>India</option>
     <option>USA</option>
@@ -28,7 +28,7 @@
     <br /><br />
 
     <label>State</label>
-    <select asp-for="State">
+    <select asp-for="State" class="form-control">
     <option value="">Select State</option>
     <option>Maharashtra</option>
     <option>Gujarat</option>
@@ -37,7 +37,7 @@
     <br /><br />
 
     <label>City</label>
-    <select asp-for="City">
+    <select asp-for="City" class="form-control">
     <option>Mumbai</option>
     <option>Pune</option>
     <option>Nagpur</option>
@@ -45,7 +45,7 @@
     <br /><br />
 
     <label>Qualification</label>
-    <select asp-for="Qualification">
+    <select asp-for="Qualification" class="form-control">
     <option value="">Select Qualification</option>
     <option>B.Tech</option>
     <option>BCA</option>
@@ -56,16 +56,16 @@
     <br /><br />
 
     <label>Email</label>
-    <input asp-for="Email" />
+    <input asp-for="Email" class="form-control" />
     <br /><br />
      
 
     <label>Phone</label>
-    <input asp-for="PhoneNo" />
+    <input asp-for="PhoneNo" class="form-control" />
     <br /><br />
 
-    <button type="submit">
-        Update Employee
-    </button>
-
+    <button type="submit" class="btn btn-warning">
+    Update Employee
+</button>
 </form>
+</div>
