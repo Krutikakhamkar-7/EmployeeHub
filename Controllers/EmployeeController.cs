@@ -24,16 +24,25 @@ namespace EmployeeManagement.Controllers
             }
         }
 
-        public IActionResult Index()
+        public IActionResult Index(string search)
+{
+    using (IDbConnection db = Connection)
+    {
+        if (!string.IsNullOrEmpty(search))
         {
-            using (IDbConnection db = Connection)
-            {
-                var employees = db.Query<Employee>(
-                    "SELECT * FROM Employees");
+            var employees = db.Query<Employee>(
+                "SELECT * FROM Employees WHERE FirstName LIKE @search OR LastName LIKE @search",
+                new { search = "%" + search + "%" });
 
-                return View(employees);
-            }
+            return View(employees);
         }
+
+        var allEmployees = db.Query<Employee>(
+            "SELECT * FROM Employees");
+
+        return View(allEmployees);
+    }
+}
 
         public IActionResult Create()
         {
