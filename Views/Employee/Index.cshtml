@@ -1,0 +1,53 @@
+@model IEnumerable<EmployeeManagement.Models.Employee>
+
+@{
+    ViewData["Title"] = "Employees";
+}
+
+<h1>Employee Management</h1>
+
+<a href="/Employee/Create" class="btn btn-primary">
+    Add Employee
+</a>
+
+<hr />
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+    @foreach(var item in Model)
+    {
+        <tr>
+            <td>@item.EmployeeId</td>
+            <td>@item.FirstName</td>
+            <td>@item.LastName</td>
+            <td>@item.Email</td>
+            <td>@item.PhoneNo</td>
+
+            <td>
+                <a href="/Employee/Edit/@item.EmployeeId"
+                   class="btn btn-warning">
+                    Edit
+                </a>
+
+                <a href="/Employee/Delete/@item.EmployeeId"
+                   class="btn btn-danger">
+                    Delete
+                </a>
+            </td>
+        </tr>
+    }
+
+    </tbody>
+</table>

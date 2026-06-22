@@ -1,0 +1,50 @@
+@model EmployeeManagement.Models.Employee
+
+<h2>Edit Employee</h2>
+
+<form method="post">
+
+    <input type="hidden" asp-for="EmployeeId" />
+
+    <label>First Name</label>
+    <input asp-for="FirstName" />
+    <br /><br />
+
+    <label>Last Name</label>
+    <input asp-for="LastName" />
+    <br /><br />
+     
+    <label>Date Of Birth</label>
+    <input asp-for="DOB" type="date" />     
+    <br /><br />
+    
+    <label>Country</label>
+    <input asp-for="Country" />
+    <br /><br />
+
+    <label>State</label>
+    <input asp-for="State" />
+    <br /><br />
+
+    <label>City</label>
+    <input asp-for="City" />
+    <br /><br />
+
+    <label>Qualification</label>
+    <input asp-for="Qualification" />
+    <br /><br />
+
+    <label>Email</label>
+    <input asp-for="Email" />
+    <br /><br />
+     
+
+    <label>Phone</label>
+    <input asp-for="PhoneNo" />
+    <br /><br />
+
+    <button type="submit">
+        Update Employee
+    </button>
+
+</form>
