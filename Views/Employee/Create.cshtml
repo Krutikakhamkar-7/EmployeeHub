@@ -1,79 +1,173 @@
 @model EmployeeManagement.Models.Employee
+
 <div class="container mt-4">
-<h2 class="text-center text-success mb-4">
-    Add Employee
-</h2>
-<form method="post">
+    <h2 class="text-center text-success mb-4">Add Employee</h2>
 
-    <label>First Name</label>
-    <input asp-for="FirstName" class="form-control" />
-    <br /><br />
-    <span asp-validation-for="FirstName" class="text-danger"></span>
+    <form method="post">
 
-    <label>Last Name</label>
-    <input asp-for="LastName" class="form-control" />
-    <br /><br />
-    <span asp-validation-for="LastName" class="text-danger"></span>
+        <label>First Name</label>
+        <input asp-for="FirstName" class="form-control" />
+        <span asp-validation-for="FirstName" class="text-danger"></span>
+        <br />
 
-    <label>Date Of Birth</label>
-    <input asp-for="DOB" type="date" class="form-control" />
-    <br /><br />
-    <span asp-validation-for="DOB" class="text-danger"></span>
+        <label>Last Name</label>
+        <input asp-for="LastName" class="form-control" />
+        <span asp-validation-for="LastName" class="text-danger"></span>
+        <br />
 
-    <label>Country</label>
-    <select asp-for="Country" class="form-control">
-    <option value="">Select Country</option>
-    <option>India</option>
-    <option>USA</option>
-    <option>UK</option>
-    </select>   
-    <br /><br />
-    <span asp-validation-for="Country" class="text-danger"></span>
+        <label>Date Of Birth</label>
+        <input asp-for="DOB" type="date" class="form-control" />
+        <span asp-validation-for="DOB" class="text-danger"></span>
+        <br />
 
-    <label>State</label>
-    <select asp-for="State" class="form-control ">
-    <option value="">Select State</option>
-    <option>Maharashtra</option>
-    <option>Gujarat</option>
-    <option>Karnataka</option>
-    </select>
-    <br /><br />
-    <span asp-validation-for="State" class="text-danger"></span>
+        <!-- Country -->
+        <label>Country</label>
+        <select asp-for="Country" id="country" class="form-control">
+            <option value="">Select Country</option>
 
-    <label>City</label>
-    <select asp-for="City" class="form-control  ">
-    <option>Mumbai</option>
-    <option>Pune</option>
-    <option>Nagpur</option>
-    </select>
-    <br /><br />
-    <span asp-validation-for="City" class="text-danger"></span>
+            @foreach (var country in ViewBag.Countries)
+            {
+                <option value="@country.iso2">
+                    @country.name
+                </option>
+            }
+        </select>
+        <span asp-validation-for="Country" class="text-danger"></span>
+        <br />
 
-    <label>Qualification</label>
-    <select asp-for="Qualification" class="form-control">
-    <option value="">Select Qualification</option>
-    <option>B.Tech</option>
-    <option>BCA</option>
-    <option>MCA</option>
-    <option>M.Tech</option>
-    <option>BSc</option>
-    </select>
-    <br /><br />
-    <span asp-validation-for="Qualification" class="text-danger"></span>
+        <!-- State -->
+        <label>State</label>
+        <select asp-for="State" id="state" class="form-control">
+            <option value="">Select State</option>
+        </select>
+        <span asp-validation-for="State" class="text-danger"></span>
+        <br />
 
-    <label>Email</label>
-    <input asp-for="Email" class="form-control" />
-    <br /><br />
-    <span asp-validation-for="Email" class="text-danger"></span>
+        <!-- City -->
+        <label>City</label>
+        <select asp-for="City" id="city" class="form-control">
+            <option value="">Select City</option>
+        </select>
+        <span asp-validation-for="City" class="text-danger"></span>
+        <br />
 
-    <label>Phone No</label>
-    <input asp-for="PhoneNo" class="form-control" />
-    <br /><br />
-    <span asp-validation-for="PhoneNo" class="text-danger"></span>
+        <label>Qualification</label>
+        <select asp-for="Qualification" class="form-control">
+            <option value="">Select Qualification</option>
+            <option>B.Tech</option>
+            <option>BCA</option>
+            <option>MCA</option>
+            <option>M.Tech</option>
+            <option>BSc</option>
+        </select>
+        <span asp-validation-for="Qualification" class="text-danger"></span>
+        <br />
 
-    <button type="submit" class="btn btn-success">
-    Save Employee
-    </button>
+        <label>Email</label>
+        <input asp-for="Email" class="form-control" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+        <br />
 
-</form>
+        <label>Phone No</label>
+        <input asp-for="PhoneNo" class="form-control" />
+        <span asp-validation-for="PhoneNo" class="text-danger"></span>
+        <br />
+
+        <button type="submit" class="btn btn-success">
+            Save Employee
+        </button>
+
+    </form>
 </div>
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/4.0.0/jquery.validate.unobtrusive.min.js"></script>
+
+<script>
+$(function () {
+
+    $("#country").change(function () {
+
+        var countryCode = $(this).val();
+
+        $("#state").empty();
+        $("#city").empty();
+
+        $("#state").append('<option value="">Select State</option>');
+        $("#city").append('<option value="">Select City</option>');
+
+        if (countryCode === "")
+            return;
+
+        $.ajax({
+            url: '/Employee/GetStates',
+            type: 'GET',
+            data: { countryCode: countryCode },
+            success: function (data) {
+
+                $.each(data, function (i, state) {
+
+                    $("#state").append(
+                        $('<option></option>')
+                            .val(state.iso2)
+                            .text(state.name)
+                    );
+
+                });
+
+            },
+            error: function (xhr) {
+                alert("Error loading states");
+                console.log(xhr);
+            }
+        });
+
+    });
+
+    $("#state").change(function () {
+
+        var countryCode = $("#country").val();
+        var stateCode = $("#state").val();
+
+        $("#city").empty();
+        $("#city").append('<option value="">Select City</option>');
+
+        if (stateCode === "")
+            return;
+
+        $.ajax({
+            url: '/Employee/GetCities',
+            type: 'GET',
+            data: {
+                countryCode: countryCode,
+                stateCode: stateCode
+            },
+            success: function (data) {
+
+                $.each(data, function (i, city) {
+
+                    $("#city").append(
+                        $('<option></option>')
+                            .val(city.name)
+                            .text(city.name)
+                    );
+
+                });
+
+            },
+            error: function (xhr) {
+                alert("Error loading cities");
+                console.log(xhr);
+            }
+        });
+
+    });
+
+});
+</script>
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}
